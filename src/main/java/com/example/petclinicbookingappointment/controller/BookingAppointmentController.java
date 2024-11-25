@@ -19,7 +19,7 @@ import com.example.petclinicbookingappointment.service.BookingAppointmentService
 import reactor.core.publisher.Mono;
 @RestController
 @Configuration
-@CrossOrigin(origins = "http://localhost:4200") // Allow CORS from Angular app
+@CrossOrigin(origins = "*") // Allow CORS from Angular app
 @RequestMapping(value = "/bookingAppointment")
 public class BookingAppointmentController {
 	private WebClient webClient;
@@ -30,7 +30,7 @@ public class BookingAppointmentController {
 	@PostMapping
 	public ResponseEntity<?> createBookingAppointment(@RequestBody BookingAppointment bookingAppointment) {
 		
-		webClient = webClientBuilder.baseUrl("http://localhost:8086").build();		
+		webClient = webClientBuilder.baseUrl("http://ec2-54-86-178-106.compute-1.amazonaws.com:8086").build();		
         Mono<Pet> petMono =  webClient.get()
                 .uri("/pet/{id}", bookingAppointment.getPetId())
                 .retrieve()                
